@@ -9,7 +9,6 @@ function App(): JSX.Element {
             <header className="App-header">
                 UD CISC275 with React Hooks and TypeScript
             </header>
-            <h1>It is me.</h1>
             <p>
                 Edit <code>src/App.tsx</code> and save. This page will
                 automatically reload.
@@ -21,7 +20,9 @@ function App(): JSX.Element {
             </h2>
             <div>
                 My Favorite Things:
-                <ul>
+                <ul
+                    style={{ textAlign: "center", listStylePosition: "inside" }}
+                >
                     <li>My homie</li>
                     <li>My homie</li>
                     <li>My homie</li>
