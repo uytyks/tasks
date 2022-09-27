@@ -5,7 +5,15 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    if (numbers.length === 0) {
+        return [];
+    } else if (numbers.length === 1) {
+        const oneE = [...numbers, ...numbers];
+        return oneE;
+    } else {
+        const twoE = [numbers[0], numbers[numbers.length - 1]];
+        return twoE;
+    }
 }
 
 /**
@@ -13,7 +21,8 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    const triple = numbers.map((n: number): number => n * 3);
+    return triple;
 }
 
 /**
@@ -21,7 +30,9 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    const ints = numbers.map((s: string): number => Number(s));
+    const intsN = ints.map((n: number): number => (isNaN(n) ? (n = 0) : n));
+    return intsN;
 }
 
 /**
@@ -32,7 +43,10 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    const nums = amounts.map((s: string): string => s.replace("$", ""));
+    const ints = nums.map((s: string): number => Number(s));
+    const intsN = ints.map((n: number): number => (isNaN(n) ? (n = 0) : n));
+    return intsN;
 };
 
 /**
@@ -41,7 +55,13 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    const noQues = messages.filter(
+        (m: string): boolean => m.lastIndexOf("?") !== m.length - 1
+    );
+    const shouts = noQues.map((m: string): string =>
+        m.lastIndexOf("!") === m.length - 1 ? m.toUpperCase() : m
+    );
+    return shouts;
 };
 
 /**
@@ -49,7 +69,8 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const small = words.filter((m: string): boolean => m.length < 4);
+    return small.length;
 }
 
 /**
@@ -58,7 +79,19 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (colors.length === 0) {
+        return true;
+    }
+    const colorCount = colors.reduce(
+        (n: number, c: string) =>
+            c === "red" || c === "blue" || c === "green" ? n + 1 : n,
+        0
+    );
+    if (colorCount === colors.length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -69,7 +102,15 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    const sum = addends.reduce((s: number, a: number) => s + a, 0);
+    if (addends.length === 0) {
+        return "0=0";
+    }
+    const sumString = addends.reduce(
+        (s: string, a: number) => (s === `${sum}=` ? s + `${a}` : s + `+${a}`),
+        `${sum}=`
+    );
+    return sumString;
 }
 
 /**
@@ -82,5 +123,17 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    const negatives = values.filter((value: number): boolean => value < 0);
+    if (negatives.length < 1) {
+        const sum = values.reduce((sum: number, i: number) => sum + i, 0);
+        const fin = [...values, sum];
+        return fin;
+    } else {
+        const n = values.indexOf(negatives[0]);
+        const sumarr = values.slice(0, n);
+        const addSum = sumarr.reduce((sum: number, i: number) => sum + i, 0);
+        const final = [...values];
+        final.splice(n + 1, 0, addSum);
+        return final;
+    }
 }
