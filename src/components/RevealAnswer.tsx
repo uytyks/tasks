@@ -2,5 +2,11 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
 export function RevealAnswer(): JSX.Element {
-    return <div>Reveal Answer</div>;
+    const [vis, setVis] = useState<boolean>(true);
+    return (
+        <div>
+            <Button onClick={() => setVis(!vis)}>Reveal Answer</Button>
+            {vis && <div>42</div>}
+        </div>
+    );
 }
