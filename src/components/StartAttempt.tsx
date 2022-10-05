@@ -12,7 +12,7 @@ export function StartAttempt(): JSX.Element {
     return (
         <div>
             <div>Attempts : {attempts}</div>
-            <Button onClick={quizStart} disabled={quizP}>
+            <Button onClick={quizStart} disabled={quizP || attempts === 0}>
                 Start Quiz
             </Button>
             <Button onClick={() => setQuizP(false)} disabled={!quizP}>
